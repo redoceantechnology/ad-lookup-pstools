@@ -7,14 +7,14 @@ $inputdata = import-csv $inputfile
 
 
 $outputdata = foreach ($user in $inputdata) {
-$lookup = $user.email 
+$lookup = $user.user 
 
 $samaccountname = Get-ADUser -filter "emailaddress -eq '$lookup'" | Select-Object -ExpandProperty samaccountname
 #$samaccountname
 
 [pscustomobject]@{
             group = $user.group
-            user = $user.email
+            user = $user.user
             samaccountname = $samaccountname
         }
 }
